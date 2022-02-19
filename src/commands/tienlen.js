@@ -1,12 +1,15 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const deck = require('../deck');
 
-const deck = []
+
+
+
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('tienlen')
-		.setDescription('Replies with a game of Tien Len!'),
-	async execute(interaction) {
-		await interaction.reply('Lets start a game of Tien Len!');
-	},
+  data: new SlashCommandBuilder()
+    .setName("tienlen")
+    .setDescription("Replies with a game of Tien Len!"),
+  async execute(interaction) {
+    await interaction.reply("Lets start a game of Tien Len!");
+  },
 };
