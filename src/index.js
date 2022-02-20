@@ -5,7 +5,9 @@ const deck = require("./deck");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 // Create a new Client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+});
 
 //client.config = config;
 
@@ -56,12 +58,27 @@ for (const file of eventFiles) {
 }
 
 // Command handling with arguments
-client.on('message', message => {
-  if (message.content === '!ping') {
-    message.channel.send('pong');
+client.on("messageCreate", (message) => {
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const command = args.shift().toLowerCase();
+
+  if (command === "ping") {
+    message.channel.send("pong");
+  } else if (command === `andy`) {
+    if (!args.length) {
+      message.channel.send("you are andy");
+    } else {
+      if (!message.mentions.users.size) return;
+
+      const taggedUser = message.mentions.users.first();
+      message.channel.send(
+        `what do you want to do with ${taggedUser.username}`
+      );
+    }
   }
 });
-
 
 // Login to Discord with your client's token
 client.login(token);

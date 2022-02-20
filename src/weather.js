@@ -15,6 +15,13 @@ async function getWeatherData() {
 
   console.log(summary)
   console.log(data)
+
+  let written = '!andy hello this is you'
+  const args = written.trim().split(' ')
+  const command = args.shift().toLowerCase()
+
+  console.log(args)
+  console.log(command)
   return summary
 }
 
