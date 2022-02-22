@@ -63,20 +63,19 @@ client.on("messageCreate", (message) => {
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
+  const user = message.author.username;
 
   if (command === "ping") {
     message.channel.send("pong");
   } else if (command === `andy`) {
-    if (!args.length) {
-      message.channel.send("you are andy");
-    } else {
-      if (!message.mentions.users.size) return;
+    message.channel.send("you are NOT andy!\nYou are " + user);
+  } else if (user === "thebeatlesphan") {
+    message.channel.send("welcome back master");
+  } else {
+    if (!message.mentions.users.size) return;
 
-      const taggedUser = message.mentions.users.first();
-      message.channel.send(
-        `what do you want to do with ${taggedUser.username}`
-      );
-    }
+    const taggedUser = message.mentions.users.first();
+    message.channel.send(`what do you want to do with ${taggedUser.username}`);
   }
 });
 
